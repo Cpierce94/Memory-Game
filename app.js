@@ -6,9 +6,12 @@ const icons = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-p
 			   "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"];
 
 const cardsContainer = document.querySelector(".deck");
+const popup = document.querySelector('.popup');
 
 let openedCards = [];
 let matchedCards = [];
+
+
 
 /*
 *Shuffles the cards
@@ -60,7 +63,7 @@ function click(card) {
 			card.classList.add("open", "show", "disable");
 			openedCards.push(this);
 		}
-	});
+	});	
 }
 
 /*
@@ -87,16 +90,25 @@ function compare(currentCard, previousCard) {
 	}
 	addMove();
 }
+/*
+* Close popup
+*/
+function closePopup() {
+	popup.classList.add("hide");
+}
 
 /*
-*Checks if game is over
+*Check if game is over
 */
-function isOver(){
+function isOver() {
 	if(matchedCards.length === icons.length) {
-		alert("YOU WIN!");
+		stopTimer();
+		popup.classList.remove("hide");
+  document.querySelector('.final-moves').innerHTML = document.querySelector('.moves').innerHTML;
+  document.querySelector('.final-time').innerHTML = document.querySelector('.timer').innerHTML;
+  document.querySelector('.final-star').innerHTML = document.querySelector('.stars').innerHTML;
+  		}
 	}
-
-}
 
 /*
 *Add Move
@@ -106,6 +118,9 @@ let moves = 0;
 function addMove() {
 	moves++;
 	movesContainer.innerHTML = moves;
+	if (moves === 1) {
+		startTimer();
+	}
 
 	//Sets the rating
 	rating();
@@ -131,6 +146,52 @@ function rating() {
 }
 
 /*
+*Timer
+*/
+const timerContainer = document.querySelector(".timer");
+let liveTimer,
+    totalSeconds = "00";
+    totalMinutes = "00";
+
+// Set the default value to the timer's container
+timerContainer.innerHTML = totalMinutes + ":"+ totalSeconds
+
+ function startTimer() {
+    liveTimer = setInterval(function() {
+        // Increase the totalSeconds by 1
+        totalSeconds++;
+        // Update the HTML Container with the new time
+        timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+        //Increase minutes when seconds equal 60
+        if(totalSeconds === 60) {
+          totalMinutes++;
+          totalSeconds = 0;
+          totalSeconds++;
+          // Update the HTML Container with the new time
+          timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+        }
+        //stop timer when there are 8 matched pairs
+        if(matchedCards.length === icons.length) {
+          stopTimer();
+          isOver();
+        }
+
+    }, 1000);
+}
+
+//reset timer
+function resetTimer() {
+  timerContainer.innerHTML = "00:00";
+}
+
+/*
+* Stop Timer
+*/
+function stopTimer() {
+    clearInterval(liveTimer);
+}
+
+/*
 *Restarts the Game
 */
 const restartBtn = document.querySelector(".restart");
@@ -148,8 +209,14 @@ restartBtn.addEventListener("click", function() {
 	movesContainer.innerHTML = 0;
 
 	starsContainer.innerHTML = star + star + star;
+
+	resetTimer();
+
+	shuffle(icons);
 });
 
-//Start the game for the first time
+//Starts the game for the first time
 shuffle(icons);
 startGame();
+
+
