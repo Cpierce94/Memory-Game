@@ -204,6 +204,7 @@ function reset() {
 	
 	//Reset any related variables like matchedCards
 	matchedCards = [];
+	openedCards = [];
 
 	moves = 0;
 	movesContainer.innerHTML = 0;
@@ -228,6 +229,7 @@ restartBtn.addEventListener("click", function() {
 	
 	//Reset any related variables like matchedCards
 	matchedCards = [];
+	openedCards = [];
 
 	moves = 0;
 	movesContainer.innerHTML = 0;
