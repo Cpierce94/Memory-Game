@@ -35,6 +35,7 @@ function shuffle(array) {
 */
 function startGame() {
 	for (let i = 0; i < icons.length; i++) {
+		let openedCards = [];
 		const card = document.createElement("li");
 		card.classList.add("card");
 		card.innerHTML = `<i class="${icons[i]}"></i>`; 
@@ -95,6 +96,7 @@ function compare(currentCard, previousCard) {
 */
 function closePopup() {
 	popup.classList.add("hide");
+	reset();
 }
 
 /*
@@ -192,7 +194,29 @@ function stopTimer() {
 }
 
 /*
-*Restarts the Game
+*Restarts the Game via the button on the popup
+*/
+function reset() {
+	cardsContainer.innerHTML = "";
+
+	//Call startGame to create new cards
+	startGame();
+	
+	//Reset any related variables like matchedCards
+	matchedCards = [];
+
+	moves = 0;
+	movesContainer.innerHTML = 0;
+
+	starsContainer.innerHTML = star + star + star;
+
+	resetTimer();
+	stopTimer();
+
+	shuffle(icons);
+}
+/*
+*Resets the Game vua the restart button
 */
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click", function() {
@@ -211,11 +235,13 @@ restartBtn.addEventListener("click", function() {
 	starsContainer.innerHTML = star + star + star;
 
 	resetTimer();
+	stopTimer();
 
 	shuffle(icons);
 });
 
-//Starts the game for the first time
+
+//start the game for the first time
 shuffle(icons);
 startGame();
 
