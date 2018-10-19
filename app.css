@@ -111,3 +111,38 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+ * Styles for the Popup
+ */
+
+.popup {
+position: absolute;
+display: flex;
+z-index: 1;
+margin: auto;
+width: 400px;
+height: 250px;
+background-color: #e84343;
+border-radius: 20px;
+}
+
+.popup-info {
+  display: relative;
+  margin: auto;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+.final-star {
+  color: #E7DA43;
+}
+
+.final-star li {
+  list-style-type: none;
+  display: inline;
+}
+
