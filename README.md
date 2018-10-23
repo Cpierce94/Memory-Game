@@ -2,7 +2,8 @@
 
 <h2>How to Play</h2>
   <span>A live version of the game can be played here: <br>
-   https://cpierce94.github.io/Memory-Game/.</span><br>
+   https://cpierce94.github.io/Memory-Game/.</span>
+  <br>
   <ol>
     <li>Download or clone the repository</li> 
     <li>Extract the .zip file</li> 
