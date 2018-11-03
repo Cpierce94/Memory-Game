@@ -37,6 +37,7 @@ function startGame() {
 		let openedCards = [];
 		const card = document.createElement("li");
 		card.classList.add("card");
+
 		card.innerHTML = `<i class="${icons[i]}"></i>`; 
 		cardsContainer.appendChild(card);
 
@@ -73,7 +74,7 @@ function compare(currentCard, previousCard) {
 	if(currentCard.innerHTML === previousCard.innerHTML) {
 		currentCard.classList.add("match");
 		previousCard.classList.add("match");
-
+		
 		matchedCards.push(currentCard, previousCard);
 				
 		openedCards = [];
