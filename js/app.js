@@ -59,7 +59,7 @@ function click(card) {
 			openedCards.push(this);
  			compare(currentCard, previousCard);
 
-		} else {
+		} else if(openedCards.length === 0) {
 			card.classList.add("open", "show", "disable");
 			openedCards.push(this);
 		}
